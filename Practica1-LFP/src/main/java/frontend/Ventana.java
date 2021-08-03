@@ -122,7 +122,7 @@ public class Ventana extends javax.swing.JFrame {
     private void BotonAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAnalizarActionPerformed
         JOptionPane.showMessageDialog(null, "Analizado Texto");
         String texto = Area1.getText();
-        
+        analizador.analizar(texto, Area2, Area3);
     }//GEN-LAST:event_BotonAnalizarActionPerformed
 
     /**
