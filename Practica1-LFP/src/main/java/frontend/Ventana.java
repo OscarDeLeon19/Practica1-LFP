@@ -5,15 +5,16 @@
  */
 package frontend;
 
+import backend.Analizador;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author oscar
  */
 public class Ventana extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Ventana
-     */
+    Analizador analizador = new Analizador();
     public Ventana() {
         initComponents();
     }
@@ -35,7 +36,7 @@ public class Ventana extends javax.swing.JFrame {
         Area2 = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        Area3 = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -47,6 +48,11 @@ public class Ventana extends javax.swing.JFrame {
         jLabel1.setText("Analizador");
 
         BotonAnalizar.setText("Analizar");
+        BotonAnalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonAnalizarActionPerformed(evt);
+            }
+        });
 
         Area2.setColumns(20);
         Area2.setRows(5);
@@ -54,9 +60,9 @@ public class Ventana extends javax.swing.JFrame {
 
         jLabel2.setText("Resultados");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        Area3.setColumns(20);
+        Area3.setRows(5);
+        jScrollPane3.setViewportView(Area3);
 
         jLabel3.setText("Historial");
 
@@ -113,6 +119,12 @@ public class Ventana extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BotonAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAnalizarActionPerformed
+        JOptionPane.showMessageDialog(null, "Analizado Texto");
+        String texto = Area1.getText();
+        
+    }//GEN-LAST:event_BotonAnalizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -151,6 +163,7 @@ public class Ventana extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Area1;
     private javax.swing.JTextArea Area2;
+    private javax.swing.JTextArea Area3;
     private javax.swing.JButton BotonAnalizar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -158,6 +171,5 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
