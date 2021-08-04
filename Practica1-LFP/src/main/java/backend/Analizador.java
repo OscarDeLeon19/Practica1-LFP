@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import javax.swing.JTextArea;
 
 public class Analizador {
-
+    /**
+     * Constructor de la clase Analizador
+     */
     public Analizador() {
 
     }
-
+    /**
+     * Enum con los diferentes tipos de tokens que se van a utilizar
+     */
     public enum Token {
         CADENA,
         ENTERO,
@@ -17,7 +21,12 @@ public class Analizador {
         ERROR,
         IGNORAR;
     }
-
+    /**
+     * Metodo utilizado para analizar la cadena de texto proveniente de la ventana
+     * @param texto El texto enviado
+     * @param AreaResultado El area donde salen los resultados del analisis
+     * @param AreaHistorial El area en donde se guardan los resultados correctos del analisis anteriores.
+     */
     public void analizar(String texto, JTextArea AreaResultado, JTextArea AreaHistorial) {
         AreaResultado.setText(null);
         ArrayList<Integer> numeros = new ArrayList<Integer>();
@@ -87,7 +96,11 @@ public class Analizador {
             }
         }
     }
-
+    /**
+     * Este metodo analiza una cadena de texto para ver si esta es correcta
+     * @param caracteres Los caracteres de la cadena de texto enviada
+     * @return True si es una cadena de texto y False si la cadena tiene errores
+     */
     public boolean probarCadena(char[] caracteres) {
         boolean comprobacion = true;
         for (int i = 0; i < caracteres.length; i++) {
@@ -100,7 +113,11 @@ public class Analizador {
         }
         return comprobacion;
     }
-
+    /**
+     * Comprueba si un numero es decimal o entero y si no tiene errores.
+     * @param caracteres Los caracteres de la cadena de digitos enviados
+     * @return Si los digitos son correctos retorna true, si hay errores retorna false
+     */
     public int probarDigito(char[] caracteres) {
         int numero = 1;
         for (int i = 0; i < caracteres.length; i++) {
@@ -120,7 +137,12 @@ public class Analizador {
         }
         return numero;
     }
-
+    /**
+     * Prueba si un numero decimal enviado es correcto
+     * @param inicio El punto de la cadena en donde se comienza a ver si es decimal
+     * @param caracteres Los caracteres que se pondran a prueba
+     * @return Si el numero decimal es correcto o erroneo
+     */
     public int probarDecimal(int inicio, char[] caracteres) {
         int numero = 2;
         for (int i = inicio; i < caracteres.length; i++) {
@@ -136,7 +158,11 @@ public class Analizador {
         }
         return numero;
     }
-
+    /**
+     * Comprueba los simbolos no validos en el programa
+     * @param c El caracter que se comparara
+     * @return true si el caracter es un simbolo, y false si no es un simbolo
+     */
     public boolean comprobarSimboloNoValido(char c) {
         boolean comprobacion = false;
         if (c == '!') {
@@ -177,10 +203,16 @@ public class Analizador {
             comprobacion = true;
         } else if (c == ')') {
             comprobacion = true;
+        } else if (c == '"') {
+            comprobacion = true;
         }
         return comprobacion;
     }
-
+    /**
+     * Comprueba si un caracter es un simbolo valido
+     * @param c El caracter que se comprobara
+     * @return True si el caracter es un simbolo y false si no lo es
+     */
     public boolean comprobarSimboloValido(char c) {
         boolean comprobacion = false;
         if (c == '[') {
