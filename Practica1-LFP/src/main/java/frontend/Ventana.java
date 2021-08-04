@@ -16,6 +16,8 @@ public class Ventana extends javax.swing.JFrame {
 
     Analizador analizador = new Analizador();
     public Ventana() {
+        setLocationRelativeTo(null);
+        setResizable(false);
         initComponents();
     }
 
@@ -56,12 +58,14 @@ public class Ventana extends javax.swing.JFrame {
 
         Area2.setColumns(20);
         Area2.setRows(5);
+        Area2.setEnabled(false);
         jScrollPane2.setViewportView(Area2);
 
         jLabel2.setText("Resultados");
 
         Area3.setColumns(20);
         Area3.setRows(5);
+        Area3.setEnabled(false);
         jScrollPane3.setViewportView(Area3);
 
         jLabel3.setText("Historial");
