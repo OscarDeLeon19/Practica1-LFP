@@ -19,15 +19,14 @@ public class Analizador {
     }
 
     public void analizar(String texto, JTextArea AreaResultado, JTextArea AreaHistorial) {
-
-        System.out.println(texto);
+        AreaResultado.setText(null);
         ArrayList<Integer> numeros = new ArrayList<Integer>();
         numeros.add(0);
         int x = 0;
         for (int i = 0; i < texto.length(); i++) {
-            if (" ".equals(texto.substring(i, i + 1))) {
+            if (" ".equals(texto.substring(i, i + 1)) || "\n".equals(texto.substring(i, i + 1))) {
                 if (i + 1 != texto.length()) {
-                    if (" ".equals(texto.substring(i + 1, i + 2))) {
+                    if (" ".equals(texto.substring(i + 1, i + 2)) || "\n".equals(texto.substring(i+1, i + 2))) {
 
                     } else {
                         numeros.add(i);
@@ -45,6 +44,7 @@ public class Analizador {
         }
         Token tokens[] = new Token[palabras.size()];
         for (int i = 0; i < palabras.size(); i++) {
+            System.out.println(palabras.get(i));
             String palabra = palabras.get(i);
             char caracteres[] = palabra.toCharArray();
             if (Character.isLetter(caracteres[0])) {
@@ -74,7 +74,17 @@ public class Analizador {
             } else if (Character.isWhitespace(caracteres[0])) {
                 tokens[i] = Token.IGNORAR;
             }
-            System.out.println(tokens[i]);
+            if (tokens[i] != Token.IGNORAR) {
+                if (tokens[i] == Token.ERROR) {
+                    AreaResultado.append("Token: " + palabras.get(i) + " Tipo: " + tokens[i]);
+                    AreaResultado.append("\n");
+                } else {
+                    AreaResultado.append("Token: " + palabras.get(i) + " Tipo: " + tokens[i]);
+                    AreaResultado.append("\n");
+                    AreaHistorial.append("Token: " + palabras.get(i) + " Tipo: " + tokens[i]);
+                    AreaHistorial.append("\n");
+                }
+            }
         }
     }
 
