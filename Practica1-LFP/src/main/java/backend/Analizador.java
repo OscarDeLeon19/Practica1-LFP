@@ -9,7 +9,7 @@ public class Analizador {
      * Constructor de la clase Analizador
      */
     public Analizador() {
-        
+
     }
 
     /**
@@ -36,20 +36,27 @@ public class Analizador {
     public void analizar(String texto, JTextArea AreaResultado, JTextArea AreaHistorial) {
         AreaResultado.setText(null);
         ArrayList<Integer> numeros = new ArrayList<>();
-        numeros.add(0);
+
         int x = 0;
         for (int i = 0; i < texto.length(); i++) {
             if (" ".equals(texto.substring(i, i + 1)) || "\n".equals(texto.substring(i, i + 1))) {
                 if (i + 1 != texto.length()) {
                     if (" ".equals(texto.substring(i + 1, i + 2)) || "\n".equals(texto.substring(i + 1, i + 2))) {
-                        
+
                     } else {
-                        numeros.add(i);
-                        numeros.add(i + 1);
+                        if (x == 0) {                            
+                            numeros.add(i + 1);
+                        } else {
+                            numeros.add(i);
+                            numeros.add(i + 1);
+                        }
                         x++;
                     }
                 }
             }
+        }
+        if (x == 0) {
+            numeros.add(0);
         }
         numeros.add(texto.length());
         ArrayList<String> palabras = new ArrayList<>();
@@ -61,7 +68,6 @@ public class Analizador {
         }
         Token tokens[] = new Token[palabras.size()];
         for (int i = 0; i < palabras.size(); i++) {
-            System.out.println(palabras.get(i));
             String palabra = palabras.get(i);
             char caracteres[] = palabra.toCharArray();
             if (Character.isLetter(caracteres[0])) {
@@ -161,15 +167,19 @@ public class Analizador {
      */
     public int probarDecimal(int inicio, char[] caracteres) {
         int numero = 2;
-        for (int i = inicio; i < caracteres.length; i++) {
-            if (comprobarSimboloNoValido(caracteres[i]) == true) {
-                numero = 3;
-            }
-            if (comprobarSimboloValido(caracteres[i]) == true) {
-                numero = 3;
-            }
-            if (Character.isLetter(caracteres[i])) {
-                numero = 3;
+        if (inicio == caracteres.length) {
+            numero = 3;
+        } else {
+            for (int i = inicio; i < caracteres.length; i++) {
+                if (comprobarSimboloNoValido(caracteres[i]) == true) {
+                    numero = 3;
+                }
+                if (comprobarSimboloValido(caracteres[i]) == true) {
+                    numero = 3;
+                }
+                if (Character.isLetter(caracteres[i])) {
+                    numero = 3;
+                }
             }
         }
         return numero;
@@ -252,8 +262,10 @@ public class Analizador {
         }
         return comprobacion;
     }
+
     /**
      * Metodo para quitar los espacios en blanco que pueda tener una palabra
+     *
      * @param palabra La palabra que se mejorara
      * @return La palabra mejorada
      */
