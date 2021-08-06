@@ -36,7 +36,7 @@ public class Analizador {
     public void analizar(String texto, JTextArea AreaResultado, JTextArea AreaHistorial) {
         AreaResultado.setText(null);
         ArrayList<Integer> numeros = new ArrayList<>();
-
+        texto = " " + texto;
         int x = 0;
         for (int i = 0; i < texto.length(); i++) {
             if (" ".equals(texto.substring(i, i + 1)) || "\n".equals(texto.substring(i, i + 1))) {
@@ -44,7 +44,7 @@ public class Analizador {
                     if (" ".equals(texto.substring(i + 1, i + 2)) || "\n".equals(texto.substring(i + 1, i + 2))) {
 
                     } else {
-                        if (x == 0) {                            
+                        if (x == 0) {
                             numeros.add(i + 1);
                         } else {
                             numeros.add(i);
